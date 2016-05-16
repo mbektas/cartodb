@@ -1,2 +1,0 @@
-#!/bin/sh
-VVERBOSE=true QUEUE=imports,exports,users,geocodings,synchronizations,tracker rake environment resque:work

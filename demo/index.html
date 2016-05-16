@@ -1,5 +1,87 @@
-<html>
-<body>
-test
-</body>
+<!doctype html>
+<!--
+    Tangram: real-time WebGL rendering for OpenStreetMap
+
+    http://github.com/tangrams/tangram
+    http://mapzen.com
+-->
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simple demo – Tangram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <!-- leaflet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+
+    <!-- Main tangram library -->
+    <script src="tangram.debug.js"></script>
+
+    <!-- Demo setup -->
+    <script>
+        function getUrlParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+      
+        var map = L.map('map');
+        var sceneParam = getUrlParameterByName("scene");
+        var scene = sceneParam || "basic";
+
+        var layer = Tangram.leafletLayer({
+            scene: scene + '.yaml'
+        });
+
+        layer.addTo(map);
+        
+        map.attributionControl.setPrefix("");
+
+        map.setView([40.763263, -73.979080/*40.70531887544228, -74.00976419448853*/], 15);
+        
+        function requestAnimate() {
+            setTimeout(function(){ animate(); }, 100);
+        }
+        
+        var maxAngle = Math.PI / 2.0;
+        var angle = 0;
+        var angleIncrement = Math.PI / 100.0;
+        
+        function animate() {
+            map.panBy([Math.sin(angle) > 0 ? 1 : - 1, 0]);
+            
+            angle += angleIncrement;
+            
+            requestAnimate();
+        }
+        
+        requestAnimate();
+    </script>
+
+  </body>
 </html>

@@ -85,6 +85,8 @@ DAT.Globe = function(container, opts) {
   var distance = 100000, distanceTarget = 100000;
   var padding = 40;
   var PI_HALF = Math.PI / 2;
+  
+  var clock = new THREE.Clock();
 
   function init() {
 
@@ -373,9 +375,19 @@ DAT.Globe = function(container, opts) {
     distanceTarget = distanceTarget > 1000 ? 1000 : distanceTarget;
     distanceTarget = distanceTarget < 350 ? 350 : distanceTarget;
   }
+  
+  function update(dt) {
+      //onWindowResize();
+
+      camera.updateProjectionMatrix();
+
+      controls.update(dt);
+    }
 
   function animate() {
     requestAnimationFrame(animate);
+    
+    update(clock.getDelta());
     render();
   }
 

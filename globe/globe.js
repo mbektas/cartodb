@@ -172,7 +172,7 @@ DAT.Globe = function(container, opts) {
         controls.connect();
         controls.update();
 
-        renderer.domElement.addEventListener('click', fullscreen, false);
+        //renderer.domElement.addEventListener('click', fullscreen, false);
 
         window.removeEventListener('deviceorientation', setOrientationControls, true);
     }

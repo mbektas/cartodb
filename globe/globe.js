@@ -82,7 +82,7 @@ DAT.Globe = function(container, opts) {
       target = { x: Math.PI*3/2, y: Math.PI / 6.0 },
       targetOnDown = { x: 0, y: 0 };
 
-  var distance = 100000, distanceTarget = 100000;
+  var distance = 500, distanceTarget = 500;
   var padding = 40;
   var PI_HALF = Math.PI / 2;
   
@@ -397,10 +397,18 @@ DAT.Globe = function(container, opts) {
     rotation.x += (target.x - rotation.x) * 0.1;
     rotation.y += (target.y - rotation.y) * 0.1;
     distance += (distanceTarget - distance) * 0.3;
+    
+    var rotationX = rotation.x;
+    var rotationY = rotation.y;
+    if (controls.getOrientation !== undefined) {
+        var orientation = controls.getOrientation();
+        rotationX = orientation.beta / 180.0 * Math.PI;
+        //rotationY = orientation.alpha / 180.0 * Math.PI;
+    }
 
-    camera.position.x = distance * Math.sin(rotation.x) * Math.cos(rotation.y);
-    camera.position.y = distance * Math.sin(rotation.y);
-    camera.position.z = distance * Math.cos(rotation.x) * Math.cos(rotation.y);
+    camera.position.x = distance * Math.sin(rotationX) * Math.cos(rotationY);
+    camera.position.y = distance * Math.sin(rotationY);
+    camera.position.z = distance * Math.cos(rotationX) * Math.cos(rotationY);
 
     camera.lookAt(mesh.position);
 

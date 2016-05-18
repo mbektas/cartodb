@@ -364,10 +364,10 @@ DAT.Globe = function(container, opts) {
   }
 
   function onWindowResize( event ) {
-    camera.aspect = container.offsetWidth / container.offsetHeight;
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize( container.offsetWidth, container.offsetHeight );
-    effect.setSize(container.offsetWidth, container.offsetHeight);
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    effect.setSize(window.innerWidth, window.innerHeight);
   }
 
   function zoom(delta) {
@@ -377,7 +377,7 @@ DAT.Globe = function(container, opts) {
   }
   
   function update(dt) {
-      //onWindowResize();
+      onWindowResize();
 
       camera.updateProjectionMatrix();
 

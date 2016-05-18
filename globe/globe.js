@@ -172,7 +172,7 @@ DAT.Globe = function(container, opts) {
         controls.connect();
         controls.update();
 
-        //renderer.domElement.addEventListener('click', fullscreen, false);
+        renderer.domElement.addEventListener('click', fullscreen, false);
 
         window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
@@ -407,6 +407,18 @@ DAT.Globe = function(container, opts) {
     //renderer.render(scene, camera);
     effect.render(scene, camera);
   }
+  
+  function fullscreen() {
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      } else if (container.mozRequestFullScreen) {
+        container.mozRequestFullScreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      }
+    }
 
   init();
   this.animate = animate;

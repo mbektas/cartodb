@@ -28,7 +28,7 @@ var Globe = function Globe(container, urls) {
   var earthPosition;
 
   // camera's distance from center (and thus the globe)
-  var distanceTarget = 300;
+  var distanceTarget = 400;
   var distance = distanceTarget;
 
   // camera's position

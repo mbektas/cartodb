@@ -87,6 +87,7 @@ DAT.Globe = function(container, opts) {
   var PI_HALF = Math.PI / 2;
   
   var clock = new THREE.Clock();
+  var infoEl;
 
   function init() {
 
@@ -177,6 +178,8 @@ DAT.Globe = function(container, opts) {
         window.removeEventListener('deviceorientation', setOrientationControls, true);
     }
     window.addEventListener('deviceorientation', setOrientationControls, true);
+    
+    infoEl = document.getElementById("info");
 
     container.addEventListener('mousedown', onMouseDown, false);
 
@@ -404,6 +407,8 @@ DAT.Globe = function(container, opts) {
         var orientation = controls.getOrientation();
         rotationX = orientation.beta / 180.0 * Math.PI;
         //rotationY = orientation.alpha / 180.0 * Math.PI;
+        
+        infoEl.innerHTML = "b: " + parseInt(orientation.beta) + ", a:" + parseInt(orientation.alpha) + ", g:" + parseInt(orientation.gamma);
     }
 
     camera.position.x = distance * Math.sin(rotationX) * Math.cos(rotationY);

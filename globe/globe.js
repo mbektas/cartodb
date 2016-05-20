@@ -405,7 +405,7 @@ DAT.Globe = function(container, opts) {
     var rotationY = rotation.y;
     if (controls.getOrientation !== undefined) {
         var orientation = controls.getOrientation();
-        rotationX = orientation.beta / 180.0 * Math.PI;
+        rotationX = orientation.alpha / 180.0 * Math.PI;
         //rotationY = orientation.alpha / 180.0 * Math.PI;
         
         infoEl.innerHTML = "b: " + parseInt(orientation.beta) + ", a:" + parseInt(orientation.alpha) + ", g:" + parseInt(orientation.gamma);
